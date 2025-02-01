@@ -18,14 +18,14 @@ export default function BlogDetail() {
             setLoading(true);
             setError(null);
             const response = await fetch(`http://localhost:5001/api/blogs/${id}`);
-            
+
             if (!response.ok) {
                 if (response.status === 404) {
                     throw new Error('Blog not found');
                 }
                 throw new Error('Failed to fetch blog');
             }
-            
+
             const data = await response.json();
             setBlog(data);
         } catch (error) {
@@ -65,19 +65,26 @@ export default function BlogDetail() {
             </button>
             <article>
                 <h2>{blog.title}</h2>
-                <div className="blog-meta">
+                {/* <div className="blog-meta">
                     {blog.createdAt && (
                         <p className="blog-date">
                             Posted on: {new Date(blog.createdAt).toLocaleDateString()}
                         </p>
                     )}
-                </div>
+                </div> */}
                 <div className="blog-content">
                     <p>{blog.content}</p>
                     {blog.image && (
                         <div className="blog-image">
                             <img src={blog.image} alt={blog.title} />
                         </div>
+                    )}
+                </div>
+                <div className="blog-meta">
+                    {blog.createdAt && (
+                        <p className="blog-date">
+                            Posted on: {new Date(blog.createdAt).toLocaleDateString()}
+                        </p>
                     )}
                 </div>
             </article>
